@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { ServersService } from '../servers.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, Data } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Params } from '@angular/router';
 
@@ -21,9 +21,12 @@ export class ServerComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.server = this.serversService.getServer(+this.route.snapshot.params['id']);
-    const tempSub = this.route.params.subscribe((params: Params) => {
-      this.server = this.serversService.getServer(+params['id']);
+    // this.server = this.serversService.getServer(+this.route.snapshot.params['id']);
+    // const tempSub = this.route.params.subscribe((params: Params) => {
+    //   this.server = this.serversService.getServer(+params['id']);
+    // });
+    const tempSub = this.route.data.subscribe((data: Data) => {
+      this.server = data['server'];
     });
     this.subscriptions.push(tempSub);
   }
