@@ -6,10 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./reactive.component.css']
 })
 export class ReactiveComponent implements OnInit {
+  genders = ['male', 'female'];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

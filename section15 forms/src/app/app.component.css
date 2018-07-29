@@ -2,7 +2,22 @@
   margin-top: 30px;
 }
 
-input.ng-invalid.ng-touched,
-select.ng-invalid.ng-touched {
-  border: 1px solid red;
+ul {
+  text-align: center;
+  color: purple;
+  list-style: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+ul li:hover {
+  text-decoration: underline;
+}
+
+ul li:focus {
+  outline: none;
+}
+
+ul li.active {
+  font-weight: bold;
 }
