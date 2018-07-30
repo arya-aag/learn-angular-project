@@ -1,23 +1,43 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a routerLink="/" class="navbar-brand">Recipe Book</a>
-    </div>
+<nav class="navbar navbar navbar-dark bg-dark">
+  <a routerLink="/"
+    class="navbar-brand">Recipe Book</a>
 
-    <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav">
-        <li routerLinkActive="active"><a routerLink="/recipes">Recipes</a></li>
-        <li routerLinkActive="active"><a routerLink="/shopping-list">Shopping List</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown" appDropdown>
-          <a style="cursor: pointer;" class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a style="cursor: pointer;">Save Data</a></li>
-            <li><a style="cursor: pointer;">Fetch Data</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
+  <div class="navbar-collapse"
+    id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item"
+        routerLinkActive="active">
+        <a class="nav-link"
+          routerLink="/recipes">Recipes</a>
+      </li>
+      <li class="nav-item"
+        routerLinkActive="active">
+        <a class="nav-link"
+          routerLink="/shopping-list">Shopping List</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown"
+        appDropdown
+        ngbDropdown>
+        <a style="cursor: pointer;"
+          class="dropdown-toggle"
+          id="deaherOptions"
+          ngbDropdownToggle
+          role="button">Manage
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu"
+          ngbDropdownMenu
+          aria-labelledby="deaherOptions">
+          <li>
+            <a style="cursor: pointer;">Save Data</a>
+          </li>
+          <li>
+            <a style="cursor: pointer;">Fetch Data</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
   </div>
 </nav>

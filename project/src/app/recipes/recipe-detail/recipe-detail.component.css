@@ -1,0 +1,8 @@
+ul.dropdown-menu li {
+  padding-left: 12px;
+}
+
+ul.dropdown-menu li:hover {
+  cursor: pointer;
+  background-color: #eaeaea;
+}
