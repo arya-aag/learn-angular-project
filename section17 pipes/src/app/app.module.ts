@@ -6,9 +6,10 @@ import { HttpModule } from '@angular/http';
 import { ShortenPipe } from './shorten.pipe';
 
 import { AppComponent } from './app.component';
+import { FilterPipe } from './filter.pipe';
 
 @NgModule({
-  declarations: [AppComponent, ShortenPipe],
+  declarations: [AppComponent, ShortenPipe, FilterPipe],
   imports: [BrowserModule, FormsModule, HttpModule],
   providers: [],
   bootstrap: [AppComponent]
