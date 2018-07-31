@@ -1,7 +1,0 @@
-a {
-  display: flex;
-}
-
-a > div > p {
-  margin-bottom: 0;
-}
