@@ -14,7 +14,7 @@ export class HeaderComponent {
   }
 
   fetchData() {
-    this.dataStoreSrv.storeRecipes().subscribe(console.log);
+    this.dataStoreSrv.fetchRecipes().subscribe(console.log);
   }
 
   resetData() {
