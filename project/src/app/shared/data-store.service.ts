@@ -24,7 +24,16 @@ export class DataStoreService {
         const newRecipes: Recipe[] = res.json();
         this.recipseSrv.updateRecipesFromDatabase(newRecipes);
       }),
-      map((res: Response) => res.json())
+      map((res: Response) => {
+        const recipes: Recipe[] = res.json();
+        for (const recipe of recipes) {
+          if (!recipe['ingredients']) {
+            console.log(recipe);
+            recipe['ingredients'] = [];
+          }
+        }
+        return recipes;
+      })
     );
   }
 
