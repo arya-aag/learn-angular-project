@@ -3,8 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  firebaseUrl: 'https://learn-tech.firebaseio.com/'
+  production: true,
+  firebaseUrl: 'https://learn-tech.firebaseio.com/',
+  firebaseAuth: {
+    apiKey: 'API_KEY_HERE',
+    authDomain: 'some-url-here.firebaseapp.com'
+  }
 };
 
 /*
