@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import { catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  token: string;
+  token: string = null;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   signupUser(email: string, password: string) {
     firebase
@@ -30,6 +31,7 @@ export class AuthService {
           .then(token => {
             this.token = token;
           });
+        this.router.navigate(['/']);
       })
       .catch(console.log);
   }
@@ -42,5 +44,14 @@ export class AuthService {
         this.token = token;
       });
     return this.token;
+  }
+
+  isAuthenticated() {
+    return this.token !== null;
+  }
+
+  logout() {
+    firebase.auth().signOut();
+    this.token = null;
   }
 }

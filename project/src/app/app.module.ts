@@ -22,6 +22,7 @@ import { RecipeService } from './recipes/recipe.service';
 import { DataStoreService } from './shared/data-store.service';
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
+import { AuthGuard } from './auth/auth.guard';
 
 @NgModule({
   declarations: [
