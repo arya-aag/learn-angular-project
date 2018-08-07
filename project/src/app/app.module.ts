@@ -9,14 +9,10 @@ import { AuthModule } from './auth/auth.module';
 
 import { AppComponent } from './app.component';
 
-import { ShoppingListService } from './shopping-list/shopping-list.service';
-import { RecipeService } from './recipes/recipe.service';
-import { DataStoreService } from './shared/data-store.service';
-
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, HttpModule, CoreModule, SharedModule, ShoppingListModule, AuthModule],
-  providers: [ShoppingListService, RecipeService, DataStoreService],
+  imports: [BrowserModule, HttpModule, SharedModule, ShoppingListModule, AuthModule, CoreModule],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
