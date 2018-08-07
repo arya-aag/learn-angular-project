@@ -3,9 +3,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, CanLoad, Rout
 
 import { AuthService } from './auth.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthGuard implements CanActivate, CanLoad {
   constructor(private authSrv: AuthService) {}
 
