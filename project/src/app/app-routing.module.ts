@@ -4,9 +4,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './auth/auth.guard';
 
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
+import { HomeComponent } from './home/home.component';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/recipes', pathMatch: 'full' },
+  { path: '', pathMatch: 'full', component: HomeComponent },
+  { path: 'recipes', loadChildren: './recipes/recipes.module#RecipesModule' },
   { path: 'shopping-list', component: ShoppingListComponent }
 ];
 
