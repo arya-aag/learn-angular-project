@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpEvent } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Response } from '@angular/http';
 import { map, tap } from 'rxjs/operators';
 
@@ -16,9 +16,17 @@ export class DataStoreService {
 
   storeRecipes() {
     const token = this.authSrv.getToken();
+
+    // const customHeaders = new HttpHeaders()
+    //   .set('Authorization', 'Bearer some-random-token-here')
+    //   .append('custom-header', 'custom-header-value');
+
     return this.http.put<Recipe[]>(
       environment.firebaseUrl + 'recipes.json?auth=' + token,
-      this.recipseSrv.getRecipesSnapshot()
+      this.recipseSrv.getRecipesSnapshot(),
+      {
+        // headers: customHeaders
+      }
     );
   }
 
