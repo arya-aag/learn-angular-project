@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { DataStoreService } from '../../shared/data-store.service';
 import { AuthService } from '../../auth/auth.service';
+import { Recipe } from '../../recipes/recipe.model';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,9 @@ export class HeaderComponent {
   constructor(private dataStoreSrv: DataStoreService, private authSrv: AuthService) {}
 
   saveData() {
-    this.dataStoreSrv.storeRecipes().subscribe(console.log);
+    this.dataStoreSrv.storeRecipes().subscribe((res: Recipe[]) => {
+      console.log(res);
+    });
   }
 
   fetchData() {

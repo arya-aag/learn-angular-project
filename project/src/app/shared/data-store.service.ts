@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { HttpClient, HttpEvent } from '@angular/common/http';
+import { Response } from '@angular/http';
 import { map, tap } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
@@ -11,24 +12,26 @@ import { AuthService } from '../auth/auth.service';
   providedIn: 'root'
 })
 export class DataStoreService {
-  constructor(private http: Http, private recipseSrv: RecipeService, private authSrv: AuthService) {}
+  constructor(private http: HttpClient, private recipseSrv: RecipeService, private authSrv: AuthService) {}
 
   storeRecipes() {
     const token = this.authSrv.getToken();
-    return this.http
-      .put(environment.firebaseUrl + 'recipes.json?auth=' + token, this.recipseSrv.getRecipesSnapshot())
-      .pipe(map((res: Response) => res.json()));
+    return this.http.put<Recipe[]>(
+      environment.firebaseUrl + 'recipes.json?auth=' + token,
+      this.recipseSrv.getRecipesSnapshot()
+    );
   }
 
   fetchRecipes() {
     const token = this.authSrv.getToken();
-    return this.http.get(environment.firebaseUrl + 'recipes.json?auth=' + token).pipe(
-      tap((res: Response) => {
-        const newRecipes: Recipe[] = res.json();
-        this.recipseSrv.updateRecipesFromDatabase(newRecipes);
-      }),
-      map((res: Response) => {
-        let recipes: Recipe[] = res.json();
+
+    // return this.http.get<Recipe[]>(environment.firebaseUrl + 'recipes.json?auth=' + token, { observe: 'events' }).pipe(
+    //   map((response: HttpEvent<Object>) => {
+    //     console.log(response);
+    //   })
+    // );
+    return this.http.get<Recipe[]>(environment.firebaseUrl + 'recipes.json?auth=' + token).pipe(
+      map(recipes => {
         if (recipes === null) {
           recipes = [];
         } else {
@@ -40,6 +43,9 @@ export class DataStoreService {
           }
         }
         return recipes;
+      }),
+      tap(newRecipes => {
+        this.recipseSrv.updateRecipesFromDatabase(newRecipes);
       })
     );
   }
@@ -47,13 +53,11 @@ export class DataStoreService {
   setDefaultRecipes() {
     const token = this.authSrv.getToken();
     return this.http
-      .put(environment.firebaseUrl + 'recipes.json?auth=' + token, this.recipseSrv.getDefaultRecipes())
+      .put<Recipe[]>(environment.firebaseUrl + 'recipes.json?auth=' + token, this.recipseSrv.getDefaultRecipes())
       .pipe(
-        tap((res: Response) => {
-          const newRecipes: Recipe[] = res.json();
+        tap(newRecipes => {
           this.recipseSrv.updateRecipesFromDatabase(newRecipes);
-        }),
-        map((res: Response) => res.json())
+        })
       );
   }
 }
