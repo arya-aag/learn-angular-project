@@ -12,9 +12,7 @@ export class HeaderComponent {
   constructor(private dataStoreSrv: DataStoreService, private authSrv: AuthService) {}
 
   saveData() {
-    this.dataStoreSrv.storeRecipes().subscribe((res: Recipe[]) => {
-      console.log(res);
-    });
+    this.dataStoreSrv.storeRecipes().subscribe(console.log);
   }
 
   fetchData() {
