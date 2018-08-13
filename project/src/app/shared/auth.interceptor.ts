@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import * as fromAppReducers from '../app.reducers';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, take } from 'rxjs/operators';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor, OnInit {
@@ -16,6 +16,7 @@ export class AuthInterceptor implements HttpInterceptor, OnInit {
     console.log('Auth Interceptor!', req);
 
     return this.store.select('auth').pipe(
+      take(1),
       switchMap(authData => {
         const token = authData.token;
         const copiedReq = req.clone({
