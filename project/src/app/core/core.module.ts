@@ -9,7 +9,6 @@ import { HeaderComponent } from './header/header.component';
 
 import { DataStoreService } from '../shared/data-store.service';
 import { RecipeService } from '../recipes/recipe.service';
-import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { AuthService } from '../auth/auth.service';
 import { AuthGuard } from '../auth/auth.guard';
 import { AuthInterceptor } from '../shared/auth.interceptor';
@@ -20,7 +19,6 @@ import { LoggingInterceptor } from '../shared/logging.interceptor';
   imports: [SharedModule, AppRoutingModule],
   exports: [AppRoutingModule, HeaderComponent],
   providers: [
-    ShoppingListService,
     RecipeService,
     DataStoreService,
     AuthService,
