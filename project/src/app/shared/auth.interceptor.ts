@@ -1,19 +1,28 @@
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
+import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
 
-import { AuthService } from '../auth/auth.service';
+import * as fromAppReducers from '../app.reducers';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable()
-export class AuthInterceptor implements HttpInterceptor {
-  constructor(private authSrv: AuthService) {}
+export class AuthInterceptor implements HttpInterceptor, OnInit {
+  constructor(private store: Store<fromAppReducers.AppState>) {}
+
+  ngOnInit() {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     console.log('Auth Interceptor!', req);
-    const copiedReq = req.clone({
-      // headers: req.headers.append('auth', token)
-      params: req.params.set('auth', this.authSrv.getToken())
-    });
-    return next.handle(copiedReq);
+
+    return this.store.select('auth').pipe(
+      switchMap(authData => {
+        const token = authData.token;
+        const copiedReq = req.clone({
+          params: req.params.set('auth', token)
+        });
+        return next.handle(copiedReq);
+      })
+    );
   }
 }
