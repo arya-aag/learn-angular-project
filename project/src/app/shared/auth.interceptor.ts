@@ -13,8 +13,6 @@ export class AuthInterceptor implements HttpInterceptor, OnInit {
   ngOnInit() {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('Auth Interceptor!', req);
-
     return this.store.select('auth').pipe(
       take(1),
       switchMap(authData => {
