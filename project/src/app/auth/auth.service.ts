@@ -9,17 +9,9 @@ import * as AuthActs from '../auth/auth.actions';
 export class AuthService {
   constructor(private router: Router, private store: Store<fromAppReducers.AppState>) {}
 
-  signupUser(email: string, password: string) {
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(user => {
-        this.store.dispatch(new AuthActs.SignUp());
-      })
-      .catch(console.log);
-  }
-
   signinUser(email: string, password: string) {
+    console.log('service sign in marker');
+
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
