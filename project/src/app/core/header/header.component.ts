@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import * as firebase from 'firebase';
 
 import { DataStoreService } from '../../shared/data-store.service';
-import { AuthService } from '../../auth/auth.service';
 import * as fromAppReducers from '../../app.reducers';
 import * as fromAuthReducers from '../../auth/auth.reducers';
+import * as AuthActs from '../../auth/auth.actions';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +18,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private dataStoreSrv: DataStoreService,
-    private authSrv: AuthService,
+    private router: Router,
     private store: Store<fromAppReducers.AppState>
   ) {}
 
@@ -37,6 +39,8 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogout() {
-    this.authSrv.logout();
+    firebase.auth().signOut();
+    this.store.dispatch(new AuthActs.Logout());
+    this.router.navigate(['/signin']);
   }
 }
