@@ -55,7 +55,6 @@ export function recipeReducer(state = initialState, action: RecipeActs.RecipeAct
         recipes: [...recipeList]
       };
 
-      AbstractFormGroupDirective;
     case RecipeActs.DELETE_RECIPE:
       const recipesList = state.recipes;
       recipesList.splice(action.payload, 1);
