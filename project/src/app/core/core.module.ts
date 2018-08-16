@@ -7,8 +7,6 @@ import { AppRoutingModule } from '../app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 
-import { DataStoreService } from '../shared/data-store.service';
-import { RecipeService } from '../recipes/recipe.service';
 import { AuthGuard } from '../auth/auth.guard';
 import { AuthInterceptor } from '../shared/auth.interceptor';
 import { LoggingInterceptor } from '../shared/logging.interceptor';
@@ -18,8 +16,6 @@ import { LoggingInterceptor } from '../shared/logging.interceptor';
   imports: [SharedModule, AppRoutingModule],
   exports: [AppRoutingModule, HeaderComponent],
   providers: [
-    RecipeService,
-    DataStoreService,
     AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,

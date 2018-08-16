@@ -1,10 +1,11 @@
 import { Recipe } from '../recipe.model';
 import { Ingredient } from '../../shared/ingredient.model';
 import * as RecipeActs from './recipes.actions';
+import * as fromAppReducers from '../../app.reducers';
 
 export const RECIPE_FEATURE_NAME = 'recipes';
 
-export interface RecipeFeatureState {
+export interface RecipeFeatureState extends fromAppReducers.AppState {
   [RECIPE_FEATURE_NAME]: RecipeState;
 }
 
@@ -61,6 +62,12 @@ export function recipeReducer(state = initialState, action: RecipeActs.RecipeAct
       return {
         ...state,
         recipes: [...recipesList]
+      };
+
+    case RecipeActs.RESET_RECIPES:
+      return {
+        ...state,
+        recipes: [...initialState.recipes]
       };
 
     default:

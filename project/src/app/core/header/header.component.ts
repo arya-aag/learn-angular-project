@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
-import * as firebase from 'firebase';
 
-import { DataStoreService } from '../../shared/data-store.service';
-import * as fromAppReducers from '../../app.reducers';
 import * as fromAuthReducers from '../../auth/auth.reducers';
 import * as AuthActs from '../../auth/auth.actions';
+import * as fromRecipeReducers from '../../recipes/store/recipes.reducers';
+import * as RecipeActs from '../../recipes/store/recipes.actions';
 
 @Component({
   selector: 'app-header',
@@ -16,26 +14,22 @@ import * as AuthActs from '../../auth/auth.actions';
 export class HeaderComponent implements OnInit {
   authState$: Observable<fromAuthReducers.AuthState>;
 
-  constructor(
-    private dataStoreSrv: DataStoreService,
-    private router: Router,
-    private store: Store<fromAppReducers.AppState>
-  ) {}
+  constructor(private store: Store<fromRecipeReducers.RecipeFeatureState>) {}
 
   ngOnInit() {
     this.authState$ = this.store.select('auth');
   }
 
   saveData() {
-    this.dataStoreSrv.storeRecipes().subscribe(console.log);
+    this.store.dispatch(new RecipeActs.SaveRecipesToDatabase());
   }
 
   fetchData() {
-    this.dataStoreSrv.fetchRecipes().subscribe(console.log);
+    this.store.dispatch(new RecipeActs.GetRecipesFromDatabase());
   }
 
   resetData() {
-    this.dataStoreSrv.setDefaultRecipes().subscribe(console.log);
+    this.store.dispatch(new RecipeActs.ResetRecipes());
   }
 
   onLogout() {

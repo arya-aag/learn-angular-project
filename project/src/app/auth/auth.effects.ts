@@ -3,9 +3,9 @@ import { Effect, Actions } from '@ngrx/effects';
 import { map, switchMap, mergeMap, tap } from 'rxjs/operators';
 import * as firebase from 'firebase';
 import { from } from 'rxjs';
+import { Router } from '@angular/router';
 
 import * as AuthActs from './auth.actions';
-import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthEffects {
