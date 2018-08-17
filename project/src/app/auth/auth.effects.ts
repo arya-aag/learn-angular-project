@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Effect, Actions } from '@ngrx/effects';
 import { map, switchMap, mergeMap, tap } from 'rxjs/operators';
-import * as firebase from 'firebase/app';
+import * as firebase from 'firebase';
 import { from } from 'rxjs';
 import { Router } from '@angular/router';
 
